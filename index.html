@@ -4,133 +4,99 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calculadora Química</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #e6f0f8, #ffffff);
-      color: #333;
-    }
-
-    .header {
-      background-color: #2d87ff;
+      background: linear-gradient(to right, #e0f7fa, #f3e5f5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
-      color: white;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 2em;
     }
 
     .container {
-      max-width: 500px;
-      margin: 50px auto;
       background: white;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    }
-
-    .container h2 {
-      text-align: center;
-      color: #2d87ff;
-    }
-
-    label, select, input {
-      display: block;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       width: 100%;
-      margin: 15px 0;
-      font-size: 1em;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #6a1b9a;
+    }
+
+    select, input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
     input, select {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      background-color: #f1f1f1;
     }
 
     button {
-      background-color: #2d87ff;
+      background-color: #7b1fa2;
       color: white;
-      border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 8px;
-      font-size: 1em;
+      font-weight: bold;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background-color: #1f6fd6;
+      background-color: #6a1b9a;
     }
 
-    .result {
+    .resultado {
       margin-top: 20px;
-      font-weight: bold;
+      background: #ede7f6;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 18px;
       text-align: center;
-      color: #28a745;
+      color: #4a148c;
     }
 
-    .icon {
-      text-align: center;
-      font-size: 50px;
+    label {
+      font-weight: 600;
       margin-top: 10px;
-      color: #2d87ff;
+      display: block;
     }
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <h1>Calculadora Química</h1>
-  </div>
-
   <div class="container">
-    <div class="icon">⚗️</div>
-    <h2>Conversión química</h2>
-    <label for="conversion">Tipo de conversión:</label>
-    <select id="conversion">
-      <option value="masa-moles">Masa ⇄ Moles</option>
-      <option value="moles-volumen">Moles ⇄ Volumen</option>
-      <option value="moles-particulas">Moles ⇄ Partículas</option>
+    <h1>Calculadora Química</h1>
+
+    <label for="tipoCalculo">Tipo de cálculo:</label>
+    <select id="tipoCalculo" onchange="mostrarCampos()">
+      <option value="masa">Masa ↔ Moles</option>
+      <option value="mol">Mol ↔ Átomos/Moléculas</option>
+      <option value="formula">Fórmula Empírica</option>
     </select>
 
-    <label for="valor">Ingresa el valor:</label>
-    <input type="number" id="valor" placeholder="Ej: 18.0">
+    <div id="campos"></div>
 
     <button onclick="calcular()">Calcular</button>
-
-    <div class="result" id="resultado"></div>
+    <div class="resultado" id="resultado"></div>
   </div>
 
-  <script>
-    function calcular() {
-      const tipo = document.getElementById("conversion").value;
-      const valor = parseFloat(document.getElementById("valor").value);
-      const resultado = document.getElementById("resultado");
-
-      if (isNaN(valor)) {
-        resultado.textContent = "Por favor ingresa un número válido.";
-        return;
-      }
-
-      switch (tipo) {
-        case "masa-moles":
-          resultado.textContent = `Resultado: ${valor / 18} mol (asumiendo H2O)`;
-          break;
-        case "moles-volumen":
-          resultado.textContent = `Resultado: ${valor * 22.4} L (en condiciones normales)`;
-          break;
-        case "moles-particulas":
-          resultado.textContent = `Resultado: ${valor * 6.022e23} partículas`;
-          break;
-        default:
-          resultado.textContent = "Tipo de conversión no reconocido.";
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+
