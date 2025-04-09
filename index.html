@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,76 +7,35 @@
   <title>Calculadora Química</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-image: url('https://cdn.pixabay.com/photo/2017/01/31/20/23/chemistry-2025835_1280.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: #ffffff;
+font-family: Arial, sans-serif;
+  margin: 20px;
+  background-image: url('https://cdn.pixabay.com/photo/2017/01/31/20/23/chemistry-2025835_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
     }
-
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.6); /* Oscurece el fondo para mejor legibilidad */
-      z-index: -1;
-    }
-
     .container {
-      background: rgba(255, 255, 255, 0.1); /* Semi-transparente */
+      background: white;
       padding: 20px;
       border-radius: 10px;
       max-width: 700px;
-      margin: 40px auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     h1 {
       text-align: center;
-      color: #ffffff;
     }
-
     label, select, input, button, textarea {
       display: block;
       width: 100%;
       margin: 10px 0;
-      font-size: 16px;
     }
-
-    input, select, textarea {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      background-color: #00bcd4;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #0097a7;
-    }
-
     #resultado {
       margin-top: 20px;
-      background: rgba(255, 255, 255, 0.2);
+      background: #e0ffe0;
       padding: 10px;
       border-radius: 5px;
       white-space: pre-wrap;
-      color: #fff;
     }
   </style>
 </head>
@@ -84,4 +44,86 @@
     <h1>Calculadora Química</h1>
     <label for="tipo">Selecciona el tipo de cálculo:</label>
     <select id="tipo">
-      <option value="
+      <option value="masa-moles">Masa ↔ Moles</option>
+      <option value="avogadro">Número de Avogadro</option>
+      <option value="at-mol">Átomos/Moléculas ↔ Moles</option>
+      <option value="masa-molar">Masa Molar</option>
+      <option value="porcentaje-masico">Composición porcentual</option>
+      <option value="formula-empirica">Fórmula empírica</option>
+      <option value="formula-molecular">Fórmula molecular</option>
+    </select>
+
+    <label for="input">Dato de entrada:</label>
+    <input type="text" id="input" placeholder="Ingresa el dato aquí">
+
+    <label for="adicional" id="labelAdicional" style="display: none;">Dato adicional:</label>
+    <input type="text" id="adicional" placeholder="Dato adicional" style="display: none;">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const AVOGADRO = 6.022e23;
+
+    function mostrarCampos(tipo) {
+      const labelAdicional = document.getElementById('labelAdicional');
+      const adicional = document.getElementById('adicional');
+
+      if (tipo === 'formula-molecular') {
+        labelAdicional.style.display = 'block';
+        adicional.style.display = 'block';
+        labelAdicional.textContent = 'Masa molar experimental (g/mol)';
+        adicional.placeholder = 'Ej: 180';
+      } else {
+        labelAdicional.style.display = 'none';
+        adicional.style.display = 'none';
+      }
+    }
+
+    document.getElementById('tipo').addEventListener('change', function() {
+      mostrarCampos(this.value);
+    });
+
+    function calcular() {
+      const tipo = document.getElementById('tipo').value;
+      const valor = document.getElementById('input').value;
+      const adicional = document.getElementById('adicional').value;
+      let resultado = '';
+
+      switch (tipo) {
+        case 'masa-moles':
+          const masaMolar = 18.015; // H2O
+          resultado = `Moles: ${(parseFloat(valor) / masaMolar).toFixed(4)} mol`;
+          break;
+        case 'avogadro':
+          resultado = `1 mol = ${AVOGADRO.toExponential(2)} partículas.`;
+          break;
+        case 'at-mol':
+          resultado = `Moles: ${(parseFloat(valor) / AVOGADRO).toExponential(4)} mol`;
+          break;
+        case 'masa-molar':
+          resultado = 'Ejemplo: H₂O = 2(1.008) + 15.999 = 18.015 g/mol';
+          break;
+        case 'porcentaje-masico':
+          resultado = 'Ejemplo H₂O: H = 11.19%, O = 88.81%';
+          break;
+        case 'formula-empirica':
+          resultado = 'Ejemplo: C6H12O6 → CH2O';
+          break;
+        case 'formula-molecular':
+          const empMasa = 30.03; // CH2O
+          const realMasa = parseFloat(adicional);
+          const factor = Math.round(realMasa / empMasa);
+          resultado = `Fórmula empírica: CH₂O\nFactor: ${factor}\nFórmula molecular: C${1 * factor}H${2 * factor}O${1 * factor}`;
+          break;
+        default:
+          resultado = 'Selección no válida.';
+      }
+
+      document.getElementById('resultado').innerText = resultado;
+    }
+  </script>
+</body>
+</html>
