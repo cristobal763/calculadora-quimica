@@ -1,125 +1,135 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calculadora Química</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f0f0f0;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e6f0f8, #ffffff);
+      color: #333;
     }
-    .container {
-      background: white;
+
+    .header {
+      background-color: #2d87ff;
       padding: 20px;
-      border-radius: 10px;
-      max-width: 700px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
+      color: white;
       text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    label, select, input, button, textarea {
+
+    .header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      color: #2d87ff;
+    }
+
+    label, select, input {
       display: block;
       width: 100%;
-      margin: 10px 0;
+      margin: 15px 0;
+      font-size: 1em;
     }
-    #resultado {
-      margin-top: 20px;
-      background: #e0ffe0;
+
+    input, select {
       padding: 10px;
-      border-radius: 5px;
-      white-space: pre-wrap;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #2d87ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1f6fd6;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #28a745;
+    }
+
+    .icon {
+      text-align: center;
+      font-size: 50px;
+      margin-top: 10px;
+      color: #2d87ff;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <div class="header">
     <h1>Calculadora Química</h1>
-    <label for="tipo">Selecciona el tipo de cálculo:</label>
-    <select id="tipo">
-      <option value="masa-moles">Masa ↔ Moles</option>
-      <option value="avogadro">Número de Avogadro</option>
-      <option value="at-mol">Átomos/Moléculas ↔ Moles</option>
-      <option value="masa-molar">Masa Molar</option>
-      <option value="porcentaje-masico">Composición porcentual</option>
-      <option value="formula-empirica">Fórmula empírica</option>
-      <option value="formula-molecular">Fórmula molecular</option>
+  </div>
+
+  <div class="container">
+    <div class="icon">⚗️</div>
+    <h2>Conversión química</h2>
+    <label for="conversion">Tipo de conversión:</label>
+    <select id="conversion">
+      <option value="masa-moles">Masa ⇄ Moles</option>
+      <option value="moles-volumen">Moles ⇄ Volumen</option>
+      <option value="moles-particulas">Moles ⇄ Partículas</option>
     </select>
 
-    <label for="input">Dato de entrada:</label>
-    <input type="text" id="input" placeholder="Ingresa el dato aquí">
-
-    <label for="adicional" id="labelAdicional" style="display: none;">Dato adicional:</label>
-    <input type="text" id="adicional" placeholder="Dato adicional" style="display: none;">
+    <label for="valor">Ingresa el valor:</label>
+    <input type="number" id="valor" placeholder="Ej: 18.0">
 
     <button onclick="calcular()">Calcular</button>
 
-    <div id="resultado"></div>
+    <div class="result" id="resultado"></div>
   </div>
 
   <script>
-    const AVOGADRO = 6.022e23;
-
-    function mostrarCampos(tipo) {
-      const labelAdicional = document.getElementById('labelAdicional');
-      const adicional = document.getElementById('adicional');
-
-      if (tipo === 'formula-molecular') {
-        labelAdicional.style.display = 'block';
-        adicional.style.display = 'block';
-        labelAdicional.textContent = 'Masa molar experimental (g/mol)';
-        adicional.placeholder = 'Ej: 180';
-      } else {
-        labelAdicional.style.display = 'none';
-        adicional.style.display = 'none';
-      }
-    }
-
-    document.getElementById('tipo').addEventListener('change', function() {
-      mostrarCampos(this.value);
-    });
-
     function calcular() {
-      const tipo = document.getElementById('tipo').value;
-      const valor = document.getElementById('input').value;
-      const adicional = document.getElementById('adicional').value;
-      let resultado = '';
+      const tipo = document.getElementById("conversion").value;
+      const valor = parseFloat(document.getElementById("valor").value);
+      const resultado = document.getElementById("resultado");
+
+      if (isNaN(valor)) {
+        resultado.textContent = "Por favor ingresa un número válido.";
+        return;
+      }
 
       switch (tipo) {
-        case 'masa-moles':
-          const masaMolar = 18.015; // H2O
-          resultado = `Moles: ${(parseFloat(valor) / masaMolar).toFixed(4)} mol`;
+        case "masa-moles":
+          resultado.textContent = `Resultado: ${valor / 18} mol (asumiendo H2O)`;
           break;
-        case 'avogadro':
-          resultado = `1 mol = ${AVOGADRO.toExponential(2)} partículas.`;
+        case "moles-volumen":
+          resultado.textContent = `Resultado: ${valor * 22.4} L (en condiciones normales)`;
           break;
-        case 'at-mol':
-          resultado = `Moles: ${(parseFloat(valor) / AVOGADRO).toExponential(4)} mol`;
-          break;
-        case 'masa-molar':
-          resultado = 'Ejemplo: H₂O = 2(1.008) + 15.999 = 18.015 g/mol';
-          break;
-        case 'porcentaje-masico':
-          resultado = 'Ejemplo H₂O: H = 11.19%, O = 88.81%';
-          break;
-        case 'formula-empirica':
-          resultado = 'Ejemplo: C6H12O6 → CH2O';
-          break;
-        case 'formula-molecular':
-          const empMasa = 30.03; // CH2O
-          const realMasa = parseFloat(adicional);
-          const factor = Math.round(realMasa / empMasa);
-          resultado = `Fórmula empírica: CH₂O\nFactor: ${factor}\nFórmula molecular: C${1 * factor}H${2 * factor}O${1 * factor}`;
+        case "moles-particulas":
+          resultado.textContent = `Resultado: ${valor * 6.022e23} partículas`;
           break;
         default:
-          resultado = 'Selección no válida.';
+          resultado.textContent = "Tipo de conversión no reconocido.";
       }
-
-      document.getElementById('resultado').innerText = resultado;
     }
   </script>
 </body>
