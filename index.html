@@ -1,102 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Calculadora Química</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <title>Calculadora Química</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 40px;
+        }
 
-    body {
-      background: linear-gradient(to right, #e0f7fa, #f3e5f5);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 600px;
-    }
+        h1 {
+            text-align: center;
+        }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #6a1b9a;
-    }
+        input, select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
 
-    select, input, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-    }
-
-    input, select {
-      background-color: #f1f1f1;
-    }
-
-    button {
-      background-color: #7b1fa2;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #6a1b9a;
-    }
-
-    .resultado {
-      margin-top: 20px;
-      background: #ede7f6;
-      padding: 15px;
-      border-radius: 10px;
-      font-size: 18px;
-      text-align: center;
-      color: #4a148c;
-    }
-
-    label {
-      font-weight: 600;
-      margin-top: 10px;
-      display: block;
-    }
-  </style>
+        .resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Calculadora Química</h1>
+    <div class="container">
+        <h1>Calculadora Química</h1>
+        <label for="masa">Masa (g):</label>
+        <input type="number" id="masa">
 
-    <label for="tipoCalculo">Tipo de cálculo:</label>
-    <select id="tipoCalculo" onchange="mostrarCampos()">
-      <option value="masa">Masa ↔ Moles</option>
-      <option value="mol">Mol ↔ Átomos/Moléculas</option>
-      <option value="formula">Fórmula Empírica</option>
-    </select>
+        <label for="masaMolar">Masa molar (g/mol):</label>
+        <input type="number" id="masaMolar">
 
-    <div id="campos"></div>
+        <button onclick="calcular()">Calcular moles</button>
 
-    <button onclick="calcular()">Calcular</button>
-    <div class="resultado" id="resultado"></div>
-  </div>
+        <div class="resultado" id="resultado"></div>
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        function calcular() {
+            const masa = parseFloat(document.getElementById('masa').value);
+            const masaMolar = parseFloat(document.getElementById('masaMolar').value);
+
+            if (isNaN(masa) || isNaN(masaMolar) || masaMolar === 0) {
+                document.getElementById('resultado').innerText = "Por favor, ingresa valores válidos.";
+                return;
+            }
+
+            const moles = masa / masaMolar;
+            document.getElementById('resultado').innerText = `Cantidad de moles: ${moles.toFixed(4)} mol`;
+        }
+    </script>
 </body>
 </html>
 
