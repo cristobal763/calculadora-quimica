@@ -73,6 +73,13 @@
       color: #2e7d32;
       white-space: pre-wrap;
     }
+
+    /* Nuevas secciones */
+    .conversion-section {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #0d47a1;
+    }
   </style>
 </head>
 <body>
@@ -99,6 +106,25 @@
     <button onclick="calcular()">Calcular</button>
 
     <div id="resultado"></div>
+
+    <!-- NUEVAS SECCIONES -->
+
+    <div class="conversion-section">
+      <h2>Convertir moles a átomos/moléculas</h2>
+      <label for="molesInput">Cantidad de moles (mol):</label>
+      <input type="number" id="molesInput" placeholder="Ej: 2.5">
+      <button onclick="molesToAtoms()">Calcular átomos/moléculas</button>
+      <div id="resMolesToAtoms" style="margin-top: 10px; font-weight: 600; color: #2e7d32;"></div>
+    </div>
+
+    <div class="conversion-section">
+      <h2>Convertir átomos/moléculas a moles</h2>
+      <label for="atomsInput">Cantidad de átomos o moléculas:</label>
+      <input type="number" id="atomsInput" placeholder="Ej: 1.2044e24">
+      <button onclick="atomsToMoles()">Calcular moles</button>
+      <div id="resAtomsToMoles" style="margin-top: 10px; font-weight: 600; color: #2e7d32;"></div>
+    </div>
+
   </div>
 
   <script>
@@ -160,6 +186,28 @@
       }
 
       document.getElementById('resultado').innerText = resultado;
+    }
+
+    // Función para convertir moles a átomos/moléculas
+    function molesToAtoms() {
+      const moles = parseFloat(document.getElementById('molesInput').value);
+      if (isNaN(moles) || moles < 0) {
+        document.getElementById('resMolesToAtoms').innerText = 'Por favor, ingresa un número válido de moles.';
+        return;
+      }
+      const resultado = moles * AVOGADRO;
+      document.getElementById('resMolesToAtoms').innerText = `Átomos/Moléculas: ${resultado.toExponential(4)}`;
+    }
+
+    // Función para convertir átomos/moléculas a moles
+    function atomsToMoles() {
+      const atoms = parseFloat(document.getElementById('atomsInput').value);
+      if (isNaN(atoms) || atoms < 0) {
+        document.getElementById('resAtomsToMoles').innerText = 'Por favor, ingresa un número válido de átomos o moléculas.';
+        return;
+      }
+      const resultado = atoms / AVOGADRO;
+      document.getElementById('resAtomsToMoles').innerText = `Moles: ${resultado.toExponential(4)}`;
     }
   </script>
 </body>
