@@ -81,30 +81,27 @@
       border-top: 2px solid #0d47a1;
     }
 
-    /* Estilo para el glosario */
-    .glosario {
-      background-color: #f9f9f9;
-      padding: 20px;
-      margin-top: 40px;
-      border-top: 3px solid #0d47a1;
+    /* Estilos para las definiciones */
+    .definiciones {
+      margin-top: 50px;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 12px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      color: #222;
+      font-size: 0.95em;
+      line-height: 1.5em;
     }
 
-    .glosario h2 {
+    .definiciones h2 {
       color: #0d47a1;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .definiciones p {
       margin-bottom: 12px;
-    }
-
-    .glosario ul {
-      padding-left: 20px;
-    }
-
-    .glosario li {
-      margin-bottom: 10px;
-      line-height: 1.6;
+      text-align: justify;
     }
   </style>
 </head>
@@ -115,7 +112,6 @@
     <label for="tipo">Selecciona el tipo de cálculo:</label>
     <select id="tipo">
       <option value="masa-moles">Masa ↔ Moles</option>
-      <option value="avogadro">Número de Avogadro</option>
       <option value="at-mol">Átomos/Moléculas ↔ Moles</option>
       <option value="masa-molar">Masa Molar</option>
       <option value="porcentaje-masico">Composición porcentual</option>
@@ -151,25 +147,22 @@
       <div id="resAtomsToMoles" style="margin-top: 10px; font-weight: 600; color: #2e7d32;"></div>
     </div>
 
-  </div>
-
-  <!-- GLOSARIO: DEFINICIONES AL FINAL -->
-  <div class="glosario">
-    <h2>Glosario de términos químicos</h2>
-    <ul>
-      <li><strong>Átomo:</strong> la mínima unidad material que representa las características de un elemento. Un elemento posee átomos iguales entre sí y diferentes a los de otro elemento. Está constituido por electrones, protones y neutrones.</li>
-      <li><strong>Compuesto:</strong> sustancia que resulta de la unión química de dos o más elementos en proporciones definidas, se combina de tal manera que ya no es posible identificarla por sus propiedades originales e individuales y solamente por medio de una acción química se le puede separar. Ejemplo: NaCl.</li>
-      <li><strong>Ecuación química:</strong> es la representación escrita, abreviada y simbólica de una reacción química; nos proporciona un medio para mostrar un cambio químico, los reactivos y los productos, su composición atómica y la relación molecular donde interviene. Ejemplo: C + O₂ → CO₂.</li>
-      <li><strong>Elemento:</strong> es una sustancia pura que no puede descomponerse en sustancias más sencillas por métodos químicos ordinarios. Ejemplos: oro, hierro, hidrógeno, helio.</li>
-      <li><strong>Molécula:</strong> se forma en el momento que los átomos se unen mediante un enlace químico llamado covalente.</li>
-      <li><strong>Número de masa:</strong> es la suma de neutrones más protones del núcleo y se representa con la letra A en la tabla periódica.</li>
-      <li><strong>Mol:</strong> cantidad de sustancia.</li>
-      <li><strong>Masa molar:</strong> es la masa de un mol de una sustancia determinada. Para un elemento, la masa molar es numéricamente igual a la masa atómica expresada en g/mol. Para un compuesto, es la suma de las masas atómicas de todos los átomos en una molécula.</li>
-      <li><strong>Número de Avogadro:</strong> representa la cantidad de partículas elementales (átomos, iones o moléculas) que están presentes en un mol de cualquier sustancia.</li>
-      <li><strong>Fórmula empírica:</strong> es la fórmula de una sustancia escrita con el subíndice entero más pequeño, proporcionando la proporción de átomos en el compuesto.</li>
-      <li><strong>Fórmula molecular:</strong> expresa el número real de átomos de cada elemento en una molécula de un compuesto.</li>
-      <li><strong>Composición porcentual:</strong> proporciona el porcentaje en masa de cada elemento en un compuesto, y se usa para derivar su fórmula empírica.</li>
-    </ul>
+    <!-- DEFINICIONES -->
+    <div class="definiciones">
+      <h2>Definiciones Químicas</h2>
+      <p><strong>Átomo:</strong> la mínima unidad material que representa las características de un elemento. Un elemento posee átomos iguales entre sí y diferentes a los de otro elemento. Está constituido por electrones, protones y neutrones.</p>
+      <p><strong>Compuesto:</strong> sustancia que resulta de la unión química de dos o más elementos en proporciones definidas, se combina de tal manera que ya no es posible identificarla por sus propiedades originales e individuales y solamente por medio de una acción química se le puede separar. Ejemplo: NaCl.</p>
+      <p><strong>Ecuación química:</strong> es la representación escrita, abreviada y simbólica de una reacción química; nos proporciona un medio para mostrar un cambio químico, los reactivos y los productos, su composición atómica y la relación molecular donde interviene. Ejemplo: C + O₂ → CO₂.</p>
+      <p><strong>Elemento:</strong> es una sustancia pura que no puede descomponerse en sustancias más sencillas por métodos químicos ordinarios; algunos ejemplos de elementos son: oro, hierro, hidrógeno y helio.</p>
+      <p><strong>Molécula:</strong> se forma en el momento que los átomos se unen mediante un enlace químico llamado covalente.</p>
+      <p><strong>Número de masa:</strong> es la suma de neutrones más protones del núcleo y se representa con la letra A en la tabla periódica.</p>
+      <p><strong>Mol:</strong> cantidad de sustancia.</p>
+      <p><strong>Masa molar:</strong> Es la masa de un mol de una sustancia determinada. Para un elemento, la masa molar es numéricamente igual a la masa atómica del elemento expresada en gramos por mol. Para un compuesto, la masa molar es la suma de las masas atómicas de todos los átomos presentes en una molécula de ese compuesto, expresada en gramos por mol (g/mol).</p>
+      <p><strong>Número de Avogadro:</strong> representa la cantidad de partículas elementales (las cuales pueden ser átomos, iones o moléculas) que están presentes en un mol de cualquier sustancia.</p>
+      <p><strong>Fórmula empírica:</strong> Una fórmula empírica de un compuesto es la fórmula de una sustancia escrita con el subíndice entero más pequeño. La fórmula empírica proporciona información sobre la proporción de átomos en el compuesto.</p>
+      <p><strong>Fórmula molecular:</strong> La fórmula molecular expresa el número de átomos de cada elemento en una molécula de un compuesto. La fórmula molecular, definida como la cantidad real de átomos en una molécula, se define como la fórmula que muestra el número real de átomos en una molécula.</p>
+      <p><strong>Composición porcentual:</strong> La composición porcentual de un compuesto proporciona el porcentaje en masa de cada elemento, y a menudo se determina experimentalmente y se utiliza para derivar su fórmula empírica.</p>
+    </div>
   </div>
 
   <script>
@@ -203,3 +196,54 @@
       switch (tipo) {
         case 'masa-moles':
           const masaMolar = 18.015; // H2O
+          resultado = `Moles: ${(parseFloat(valor) / masaMolar).toFixed(4)} mol`;
+          break;
+        case 'at-mol':
+          resultado = `Moles: ${(parseFloat(valor) / AVOGADRO).toExponential(4)} mol`;
+          break;
+        case 'masa-molar':
+          resultado = 'Ejemplo: H₂O = 2(1.008) + 15.999 = 18.015 g/mol';
+          break;
+        case 'porcentaje-masico':
+          resultado = 'Ejemplo H₂O: H = 11.19%, O = 88.81%';
+          break;
+        case 'formula-empirica':
+          resultado = 'Ejemplo: C6H12O6 → CH2O';
+          break;
+        case 'formula-molecular':
+          const empMasa = 30.03; // CH2O
+          const realMasa = parseFloat(adicional);
+          const factor = Math.round(realMasa / empMasa);
+          resultado = `Fórmula empírica: CH₂O\nFactor: ${factor}\nFórmula molecular: C${1 * factor}H${2 * factor}O${1 * factor}`;
+          break;
+        default:
+          resultado = 'Selección no válida.';
+      }
+
+      document.getElementById('resultado').innerText = resultado;
+    }
+
+    // Función para convertir moles a átomos/moléculas
+    function molesToAtoms() {
+      const moles = parseFloat(document.getElementById('molesInput').value);
+      if (isNaN(moles) || moles < 0) {
+        document.getElementById('resMolesToAtoms').innerText = 'Por favor, ingresa un número válido de moles.';
+        return;
+      }
+      const resultado = moles * AVOGADRO;
+      document.getElementById('resMolesToAtoms').innerText = `Átomos/Moléculas: ${resultado.toExponential(4)}`;
+    }
+
+    // Función para convertir átomos/moléculas a moles
+    function atomsToMoles() {
+      const atoms = parseFloat(document.getElementById('atomsInput').value);
+      if (isNaN(atoms) || atoms < 0) {
+        document.getElementById('resAtomsToMoles').innerText = 'Por favor, ingresa un número válido de átomos o moléculas.';
+        return;
+      }
+      const resultado = atoms / AVOGADRO;
+      document.getElementById('resAtomsToMoles').innerText = `Moles: ${resultado.toExponential(4)}`;
+    }
+  </script>
+</body>
+</html>
